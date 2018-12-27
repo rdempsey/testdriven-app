@@ -1,6 +1,6 @@
 # Microservices with Docker, Flask, and React
 
-[![Build Status](https://travis-ci.org/rdempsey/testdriven-app.svg?branch=master)](https://travis-ci.org/rdempsey/testdriven-app)
+[![Build Status](https://travis-ci.com/rdempsey/testdriven-app.svg?branch=master)](https://travis-ci.com/rdempsey/testdriven-app)
 
 This application is an example of a micro-services architecture using Docker, Flask and React from the online course, [Microservices with Docker, Flask, and React](https://testdriven.io/courses/microservices-with-docker-flask-and-react/)
 
