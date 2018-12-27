@@ -18,7 +18,7 @@ docker-compose -f docker-compose-dev.yml run users python manage.py recreate-db
 
 Seed the database:
 ```
-docker-compose -f docker-compose-dev.yml run users python manage.py recreate-db
+docker-compose -f docker-compose-dev.yml run users python manage.py seed-db
 ```
 
 Run the tests:
