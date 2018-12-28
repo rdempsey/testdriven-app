@@ -25,6 +25,13 @@ docker build -f Dockerfile-prod -t "test" ./ \
 ```
 
 
+## Running Database Migrations
+
+* Create a migration repository: `docker-compose -f docker-compose-dev.yml run users python manage.py db init`
+* Generate an initial migration: `docker-compose -f docker-compose-dev.yml run users python manage.py db migrate`
+* Apply the migrations to the database: `docker-compose -f docker-compose-dev.yml run users python manage.py db upgrade`
+
+
 ## Access the Application
 
 * Homepage: [http://localhost](http://localhost)
@@ -32,9 +39,8 @@ docker build -f Dockerfile-prod -t "test" ./ \
 
 ## Working With the Postgres Database
 
-Once you access the Postgres database (see above), choose the `users_dev` database and select all of the users.
+Once you access the Postgres database (see above):
 
-```
-# \c users_dev
-# select * from users;
-```
+* Choose the `users_dev` database: `# \c users_dev`
+* Describe the `users` table: `# \d+ users`
+* Select all of the users: `# select * from users;`
