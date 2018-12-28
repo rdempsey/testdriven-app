@@ -6,39 +6,35 @@ This application is an example of a micro-services architecture using Docker, Fl
 
 ## Manage the Application
 
-Deploy the application:
+* Deploy the application: `docker-compose -f docker-compose-dev.yml up -d --build`
+* Create the database: `docker-compose -f docker-compose-dev.yml run users python manage.py recreate-db`
+* Seed the database: `docker-compose -f docker-compose-dev.yml run users python manage.py seed-db`
+* Run the Python tests: `docker-compose -f docker-compose-dev.yml run users python manage.py test`
+* Run the Python tests with coverage: `docker-compose -f docker-compose-dev.yml run users python manage.py cov`
+* Run Flake8: `docker-compose -f docker-compose-dev.yml run users flake8 project`
+* Run the client-side (npm) tests: `docker-compose -f docker-compose-dev.yml run client npm test`
+* Access the container logs: `docker-compose -f docker-compose-dev.yml logs -f`
+* Access the Postgres container: `docker-compose -f docker-compose-dev.yml exec users-db psql -U postgres`
+
+## Run a Multi-Stage Docker Build for the Client
+
 ```
-docker-compose -f docker-compose-dev.yml up -d --build
+docker build -f Dockerfile-prod -t "test" ./ \
+  --build-arg NODE_ENV=development \
+  --build-arg REACT_APP_USERS_SERVICE_URL=http://127.0.0.1
 ```
 
-Create the database:
-```
-docker-compose -f docker-compose-dev.yml run users python manage.py recreate-db
-```
 
-Seed the database:
-```
-docker-compose -f docker-compose-dev.yml run users python manage.py seed-db
-```
+## Access the Application
 
-Run the tests:
-```
-docker-compose -f docker-compose-dev.yml run users python manage.py test
-```
+* Homepage: [http://localhost](http://localhost)
+* Users: [http://localhost/users](http://localhost/users)
 
-Run the tests with coverage:
-```
-docker-compose -f docker-compose-dev.yml run users python manage.py cov
-```
+## Working With the Postgres Database
 
-Run Flake8:
-```
-docker-compose -f docker-compose-dev.yml run users flake8 project
-```
+Once you access the Postgres database (see above), choose the `users_dev` database and select all of the users.
 
-Access the Postgres container:
 ```
-docker-compose -f docker-compose-dev.yml exec users-db psql -U postgres
 # \c users_dev
 # select * from users;
 ```
